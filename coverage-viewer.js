@@ -16,8 +16,9 @@
     if(process.argv.length < 3)
         return -1;
 
-    var fileName = process.argv[2];
-    var content = JSON.parse(fs.readFileSync(path.resolve(__dirname, fileName), 'UTF-8'));
+    var fileContent = fs.readFileSync(path.resolve(process.argv[2]), 'UTF-8');
+    var json = fileContent.substring(fileContent.indexOf("{"), fileContent.length);
+    var content = JSON.parse(json);
 
     console.log("Overall coverage is " +  content.coverage + "%");
 
