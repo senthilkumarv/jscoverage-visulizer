@@ -5,7 +5,7 @@
     var path = require('path');
 
     var printCoverageOf = function(file) {
-        console.log(file.filename + " has as coverage of " + file.coverage + "%");
+        console.log(file.filename + " has a coverage of " + file.coverage + "%");
     };
 
     var isCoveredEnough = function(actual, minimum) {
@@ -20,11 +20,13 @@
     var json = fileContent.substring(fileContent.indexOf("{"), fileContent.length);
     var content = JSON.parse(json);
 
+    console.log("------------------------------------------------------------------------");
     console.log("Overall coverage is " +  content.coverage + "%");
 
     for(var file in content.files) {   
         printCoverageOf(content.files[file]);
     }
-
+    console.log("------------------------------------------------------------------------");
+    
     return isCoveredEnough(content.coverage, process.argv[3]);
 })();
