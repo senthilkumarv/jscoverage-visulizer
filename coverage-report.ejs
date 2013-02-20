@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Coverage Report</title>
+		<style>
+			tr:nth-child(even) {
+				background: #CCC;
+			}
+			tr:nth-child(odd) {
+				background: #FFF;
+			}
+			table {
+				border: 1px solid black;				
+			}
+			td, th { 
+				height: 30px; 
+				width: 300px;
+			}
+			th {
+				background: #AAA;				
+			}
+			.key {
+				padding-left: 20px;
+			}
+			.value {
+				padding-right: 20px;
+				text-align: right;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>Coverage Report</h3>
+		<table class="report" cellpadding="0" cellspacing="0">
+			<thead>
+				<tr>
+					<th>Filename</th>
+					<th>Coverage </th>
+				</tr>
+			</thead>
+			<tbody>
+				<% for(var i=0;i<files.length;i++) { %>
+				<tr>
+					<td class="key"><%= files[i].filename %></td>
+					<td class="value"><%= (Math.round(files[i].coverage * 100) / 100) + '%' %></td>
+				</tr>
+				<% } %>
+			</tbody>
+		</table>
+		<p>Overall coverage is <%= (Math.round(coverage * 100) / 100) + '%' %>%</p>
+	</body>
+</html>

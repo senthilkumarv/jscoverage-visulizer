@@ -2,16 +2,39 @@
 
 (function() {
     var fs = require('fs');
-    var path = require('path');
 
-    var printCoverageOf = function(file) {
-        console.log(file.filename + " has a coverage of " + file.coverage + "%");
-    };
+	
+    var path = require('path');
 
     var isCoveredEnough = function(actual, minimum) {
         minimum  = (minimum) ? minimum : 0;
         return (actual >= minimum) ? 0 : -2;
-    };
+    }; 
+   
+	var printOutputToConsole = function(content) {
+	    var printCoverageOf = function(file) {
+	        console.log(file.filename + " has a coverage of " + file.coverage + "%");
+	    };
+	    console.log("------------------------------------------------------------------------");
+	    console.log("Overall coverage is " +  content.coverage + "%");
+
+	    for(var file in content.files) {   
+	        printCoverageOf(content.files[file]);
+	    }
+	    console.log("------------------------------------------------------------------------");		
+	};
+	
+	var printOutputToFile = function(content, fileName) {
+		var ejs = require('ejs');
+		var template = fs.readFileSync(path.resolve(__dirname, 'coverage-report.ejs'), 'UTF-8');		
+		var html = ejs.render(template, {
+			locals: {
+				files: content.files,
+				coverage: content.coverage
+			}
+		}) ;
+	 	fs.writeFile(fileName, html);
+	};
 
     if(process.argv.length < 3)
         return -1;
@@ -19,14 +42,7 @@
     var fileContent = fs.readFileSync(path.resolve(process.argv[2]), 'UTF-8');
     var json = fileContent.substring(fileContent.indexOf("{"), fileContent.length);
     var content = JSON.parse(json);
-
-    console.log("------------------------------------------------------------------------");
-    console.log("Overall coverage is " +  content.coverage + "%");
-
-    for(var file in content.files) {   
-        printCoverageOf(content.files[file]);
-    }
-    console.log("------------------------------------------------------------------------");
-    
-    return isCoveredEnough(content.coverage, process.argv[3]);
+    printOutputToConsole(content);
+    printOutputToFile(content, process.argv[3]);
+    return isCoveredEnough(content.coverage, process.argv[4]);
 })();
