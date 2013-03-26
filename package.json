@@ -1,0 +1,24 @@
+{
+  "name": "jscoverage-viewer",
+  "description": "View JSCoverage Report",
+  "version": "0.1",
+  "author": {
+    "name": "Senthil",
+    "email": "senthil.vijay.kumar@gmail.com"
+  },
+  "keywords": [
+    "jscoverage",
+    "coverage viewer"
+  ],
+  "devDependencies": {
+    "ejs": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/senthilkumarv/jscoverage-visulizer.git"
+  },
+  "readme": "",
+  "readmeFilename": "Readme.md",
+  "_id": "jscoverage-viewer@0.1",
+  "_from": "jscoverage-viewer@*"
+}
