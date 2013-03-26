@@ -33,16 +33,16 @@
 				coverage: content.coverage
 			}
 		}) ;
-	 	fs.writeFile(fileName, html);
+	 	fs.writeFileSync(fileName, html);
 	};
 
     if(process.argv.length < 3)
-        return -1;
+        process.exit(-1);
 
     var fileContent = fs.readFileSync(path.resolve(process.argv[2]), 'UTF-8');
     var json = fileContent.substring(fileContent.indexOf("{"), fileContent.length);
     var content = JSON.parse(json);
     printOutputToConsole(content);
     printOutputToFile(content, process.argv[3]);
-    return isCoveredEnough(content.coverage, process.argv[4]);
+    process.exit(isCoveredEnough(content.coverage, process.argv[4]));
 })();
