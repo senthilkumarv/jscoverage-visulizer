@@ -1,7 +1,7 @@
 {
   "name": "jscoverage-viewer",
   "description": "View JSCoverage Report",
-  "version": "0.1",
+  "version": "0.1.0",
   "author": {
     "name": "Senthil",
     "email": "senthil.vijay.kumar@gmail.com"
@@ -19,6 +19,6 @@
   },
   "readme": "",
   "readmeFilename": "Readme.md",
-  "_id": "jscoverage-viewer@0.1",
+  "_id": "jscoverage-viewer@0.1.0",
   "_from": "jscoverage-viewer@*"
 }
