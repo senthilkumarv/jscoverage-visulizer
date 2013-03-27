@@ -10,7 +10,7 @@
     "jscoverage",
     "coverage viewer"
   ],
-  "devDependencies": {
+  "dependencies": {
     "ejs": "*"
   },
   "repository": {
