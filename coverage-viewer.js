@@ -2,15 +2,16 @@
 
 (function() {
     var fs = require('fs');
+    var _ = require('underscore');
 
-	
+
     var path = require('path');
 
     var isCoveredEnough = function(actual, minimum) {
         minimum  = (minimum) ? minimum : 0;
         return (actual >= minimum) ? 0 : -2;
-    }; 
-   
+    };
+
 	var printOutputToConsole = function(content) {
 	    var printCoverageOf = function(file) {
 	        console.log(file.filename + " has a coverage of " + file.coverage + "%");
@@ -18,18 +19,20 @@
 	    console.log("------------------------------------------------------------------------");
 	    console.log("Overall coverage is " +  content.coverage + "%");
 
-	    for(var file in content.files) {   
+	    for(var file in content.files) {
 	        printCoverageOf(content.files[file]);
 	    }
-	    console.log("------------------------------------------------------------------------");		
+	    console.log("------------------------------------------------------------------------");
 	};
-	
+
 	var printOutputToFile = function(content, fileName) {
 		var ejs = require('ejs');
-		var template = fs.readFileSync(path.resolve(__dirname, 'coverage-report.ejs'), 'UTF-8');		
+		var template = fs.readFileSync(path.resolve(__dirname, 'coverage-report.ejs'), 'UTF-8');
 		var html = ejs.render(template, {
 			locals: {
-				files: content.files,
+		        files: _.sortBy(content.files,function(file){
+                    return file.coverage;
+                }),
 				coverage: content.coverage
 			}
 		}) ;

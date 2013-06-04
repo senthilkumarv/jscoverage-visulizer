@@ -11,7 +11,8 @@
     "coverage viewer"
   ],
   "dependencies": {
-    "ejs": "*"
+    "ejs": "*",
+    "underscore": "*"
   },
   "repository": {
     "type": "git",
