@@ -29,12 +29,10 @@
     var ejs = require('ejs');
     var template = fs.readFileSync(path.resolve(__dirname, 'coverage-report.ejs'), 'UTF-8');
     var html = ejs.render(template, {
-      locals: {
         files: _.sortBy(content.files,function(file){
           return file.coverage;
         }),
         coverage: content.coverage
-      }
     }) ;
     fs.writeFileSync(fileName, html);
   };
